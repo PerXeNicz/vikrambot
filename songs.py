@@ -195,6 +195,7 @@ class songAPI:
             await ctx.channel.send("I'm currently connect to {0}. I AM UNSTOPABLE.".format(voice_client.channel))
             return
 
+        await ctx.channel.send("Stop!")
         voice_client.stop()
 
     async def pause(self, ctx):

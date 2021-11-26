@@ -23,8 +23,8 @@ async def on_ready():
     print(f"Logged In")
 
 @bot.command()
-async def test(ctx):
-    await ctx.channel.send("hello")
+async def chess(ctx):
+    await ctx.channel.send("https://i.pinimg.com/originals/ff/dc/94/ffdc948e6807a8fc8c9871edbbbd424c.gif")
 
 @bot.command()
 async def help(ctx):
@@ -36,7 +36,8 @@ async def help(ctx):
     emBed.add_field(name='!skip', value="Skip the current song.", inline=False)
     emBed.add_field(name='!queue', value="Display the queue of the current tracks in the playlist.", inline=False)
     emBed.add_field(name='!leave', value="Kick GM VIKRAM from voice channel.", inline=False)
-    emBed.set_thumbnail(url='https://media-exp1.licdn.com/dms/image/C560BAQFHd3L0xFcwcw/company-logo_200_200/0/1550868149376?e=2159024400&v=beta&t=LyKtz-V4W8Gfwzi2ZqmikaI9GcUXI3773_aa3F3nIhg')
+    emBed.add_field(name='!chess', value="The next move is obvious.", inline=False)
+    emBed.set_thumbnail(url='https://yt3.ggpht.com/ytc/AKedOLR75wfNA5EF7VbFGDfirGklxqQ_33TgIBzdiyc2=s88-c-k-c0x00ffffff-no-rj')
     await ctx.channel.send(embed=emBed)
 
 @bot.command() 
