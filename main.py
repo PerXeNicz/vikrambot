@@ -30,7 +30,6 @@ async def chess(ctx):
 async def help(ctx):
     emBed = discord.Embed(title="Grandmaster Vikram Rahul Abishek Pranav Rajesh will help you.", description="Available commands", color=0x2ACAEA)
     emBed.add_field(name='!play', value="Add a song to queue and plays it.", inline=False)
-    emBed.add_field(name='!stop', value="Stop the current song and clears the entire music queue.", inline=False)
     emBed.add_field(name='!pause', value="Pauses the currently playing track.", inline=False)
     emBed.add_field(name='!resume', value="Resumes the track you just pause.", inline=False)
     emBed.add_field(name='!skip', value="Skip the current song.", inline=False)
@@ -43,10 +42,6 @@ async def help(ctx):
 @bot.command() 
 async def play(ctx,* ,search: str):
     await songsInstance.play(ctx, search)
-
-@bot.command()
-async def stop(ctx):
-    await songsInstance.stop(ctx)
 
 @bot.command()
 async def pause(ctx):

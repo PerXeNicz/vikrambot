@@ -58,7 +58,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
             # take first item from a playlist
             data = data['entries'][0]
 
-        await ctx.send(f'```ini\n[Added {data["title"]} to the Queue.]\n```') #delete after can be added
+        await ctx.reply(f':notes: **{data["title"]}** Added to the Queue.') #delete after can be added
 
         if download:
             source = ytdl.prepare_filename(data)
@@ -132,8 +132,8 @@ class MusicPlayer:
             self.current = source
 
             self._guild.voice_client.play(source, after=lambda _: self.bot.loop.call_soon_threadsafe(self.next.set))
-            self.np = await self._channel.send(f'**Now Playing:** `{source.title}` requested by '
-                                               f'`{source.requester}`')
+            self.np = await self._channel.send(f':loud_sound: Now Playing: **{source.title}** requested by '
+                                               f'{source.requester}')
             await self.next.wait()
 
             # Make sure the FFmpeg process is cleaned up.
@@ -185,19 +185,6 @@ class songAPI:
         return player
         
 
-    async def stop(self, ctx):
-        voice_client = get(self.bot.voice_clients, guild=ctx.guild)
-        if voice_client == None:
-            await ctx.channel.send("I'm not connect to voice channel.")
-            return
-
-        if voice_client.channel != ctx.author.voice.channel:
-            await ctx.channel.send("I'm currently connect to {0}. I AM UNSTOPABLE.".format(voice_client.channel))
-            return
-
-        await ctx.channel.send("Stop!")
-        voice_client.stop()
-
     async def pause(self, ctx):
         voice_client = get(self.bot.voice_clients, guild=ctx.guild)
         if voice_client == None:
@@ -209,6 +196,7 @@ class songAPI:
             return
 
         voice_client.pause()
+        await ctx.send(f':pause_button: **Paused!**')
 
     async def resume(self, ctx):
         voice_client = get(self.bot.voice_clients, guild=ctx.guild)
@@ -221,6 +209,7 @@ class songAPI:
             return
 
         voice_client.resume()
+        await ctx.send(f':arrow_forward: **Resumed!**')
 
     async def leave(self, ctx):
         del self.players[ctx.guild.id]
@@ -239,7 +228,7 @@ class songAPI:
         
         # 1 2 3
         upcoming = list(itertools.islice(player.queue._queue,0,player.queue.qsize()))
-        fmt = '\n'.join(f'**`{_["title"]}`**' for _ in upcoming)
+        fmt = '\n'.join(f'**{_["title"]}**' for _ in upcoming)
         embed = discord.Embed(title=f'Upcoming - Next {len(upcoming)}', description=fmt)
         await ctx.send(embed=embed)
 
@@ -256,4 +245,4 @@ class songAPI:
             return
 
         voice_client.stop()
-        await ctx.send(f'**`{ctx.author}`**: Skipped the song!')
+        await ctx.send(f'**{ctx.author}** : Skipped the song!')
