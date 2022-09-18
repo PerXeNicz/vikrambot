@@ -14,7 +14,8 @@ def read_token():
 
 discord_token = read_token()
 
-bot = commands.Bot(command_prefix='!',help_command=None)
+intents = discord.Intents.all()
+bot = commands.Bot(command_prefix='!', intents=intents, help_command=None)
 
 songsInstance = songAPI()
 
