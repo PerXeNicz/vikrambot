@@ -166,7 +166,7 @@ class songAPI:
             await channel.connect()
             voice_client = get(self.bot.voice_clients, guild=ctx.guild)
 
-        await ctx.trigger_typing()
+        await ctx.typing()
 
         _player = self.get_player(ctx)
         source = await YTDLSource.create_source(ctx, search, loop=self.bot.loop, download=False)
